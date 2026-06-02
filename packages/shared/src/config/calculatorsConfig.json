@@ -1,0 +1,9 @@
+[
+  {
+    "id": "emi",
+    "title": "EMI Calculator",
+    "icon": "calculator",
+    "route": "/emi",
+    "description": "Calculate Equated Monthly Installment for your loans"
+  }
+]

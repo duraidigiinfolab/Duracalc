@@ -3,6 +3,7 @@ import { StyleSheet, TextInput, View, Switch, ScrollView, TouchableOpacity } fro
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { calculateEmi } from '@calculator/shared';
+import { Ionicons } from '@expo/vector-icons';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -28,10 +29,13 @@ export default function HomeScreen() {
   return (
     <ThemedView style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => router.navigate('/')} style={styles.backButton}>
+            <Ionicons name="arrow-back" size={24} color="#a1a1aa" />
+          </TouchableOpacity>
+          <ThemedText style={styles.headerTitle}>EMI Calculator</ThemedText>
+        </View>
         <ScrollView contentContainerStyle={styles.scrollContent}>
-          <ThemedText type="title" style={styles.title}>
-            EMI Calculator
-          </ThemedText>
 
           <View style={styles.card}>
             <View style={styles.inputGroup}>
@@ -139,12 +143,9 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 40,
   },
-  title: {
-    textAlign: 'center',
-    marginBottom: 30,
-    marginTop: 20,
-    color: '#c084fc', // purple-400
-  },
+  header: { flexDirection: 'row', alignItems: 'center', padding: 16, borderBottomWidth: 1, borderBottomColor: '#27272a' },
+  backButton: { marginRight: 16, padding: 4 },
+  headerTitle: { fontSize: 20, fontWeight: 'bold', color: '#c084fc' },
   card: {
     backgroundColor: '#18181b', // zinc-900
     borderRadius: 16,

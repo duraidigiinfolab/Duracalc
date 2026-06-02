@@ -5,5 +5,12 @@
     "icon": "calculator",
     "route": "/emi",
     "description": "Calculate Equated Monthly Installment for your loans"
+  },
+  {
+    "id": "percentage",
+    "title": "Percentage Calculator",
+    "icon": "percent",
+    "route": "/percentage-calculator",
+    "description": "Easily calculate percentages, discounts, and increases"
   }
 ]

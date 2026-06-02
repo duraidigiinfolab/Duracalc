@@ -32,6 +32,18 @@ export default function BasicCalculatorScreen() {
     setExpression('');
   };
 
+  const deleteLast = () => {
+    if (display === 'Error') {
+      setDisplay('0');
+      return;
+    }
+    if (display.length > 1) {
+      setDisplay(display.slice(0, -1));
+    } else {
+      setDisplay('0');
+    }
+  };
+
   const renderButton = (text: string, onPress: () => void, styleType: 'default' | 'operator' | 'action' = 'default') => {
     const buttonStyles = [
       styles.button,
@@ -61,31 +73,41 @@ export default function BasicCalculatorScreen() {
 
         <View style={styles.keypad}>
           <View style={styles.row}>
-            <TouchableOpacity style={[styles.button, styles.actionButton, { flex: 3 }]} onPress={clear}>
+            <TouchableOpacity style={[styles.button, styles.actionButton, { flex: 2 }]} onPress={clear}>
               <ThemedText style={styles.actionText}>AC</ThemedText>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.button, { backgroundColor: '#7c2d12' }]} onPress={deleteLast}>
+              <ThemedText style={[styles.actionText, { color: '#fdba74' }]}>DEL</ThemedText>
             </TouchableOpacity>
             {renderButton('÷', () => handleOperator('/'), 'operator')}
           </View>
           
           <View style={styles.row}>
+            {renderButton('(', () => handleNumber('('), 'operator')}
+            {renderButton(')', () => handleNumber(')'), 'operator')}
+            {renderButton('%', () => handleNumber('%'), 'operator')}
+            {renderButton('×', () => handleOperator('*'), 'operator')}
+          </View>
+
+          <View style={styles.row}>
             {renderButton('7', () => handleNumber('7'))}
             {renderButton('8', () => handleNumber('8'))}
             {renderButton('9', () => handleNumber('9'))}
-            {renderButton('×', () => handleOperator('*'), 'operator')}
+            {renderButton('−', () => handleOperator('-'), 'operator')}
           </View>
 
           <View style={styles.row}>
             {renderButton('4', () => handleNumber('4'))}
             {renderButton('5', () => handleNumber('5'))}
             {renderButton('6', () => handleNumber('6'))}
-            {renderButton('−', () => handleOperator('-'), 'operator')}
+            {renderButton('+', () => handleOperator('+'), 'operator')}
           </View>
 
           <View style={styles.row}>
             {renderButton('1', () => handleNumber('1'))}
             {renderButton('2', () => handleNumber('2'))}
             {renderButton('3', () => handleNumber('3'))}
-            {renderButton('+', () => handleOperator('+'), 'operator')}
+            {renderButton('=', calculate, 'action')}
           </View>
 
           <View style={styles.row}>
@@ -93,7 +115,7 @@ export default function BasicCalculatorScreen() {
               <ThemedText style={styles.buttonText}>0</ThemedText>
             </TouchableOpacity>
             {renderButton('.', () => handleNumber('.'))}
-            {renderButton('=', calculate, 'action')}
+            <View style={{ flex: 1 }} />
           </View>
         </View>
       </SafeAreaView>
@@ -106,9 +128,9 @@ const styles = StyleSheet.create({
   safeArea: { flex: 1, justifyContent: 'flex-end', padding: 16 },
   displayContainer: { padding: 16, alignItems: 'flex-end', marginBottom: 20 },
   expressionText: { color: '#a1a1aa', fontSize: 24, minHeight: 30 },
-  displayText: { color: '#fff', fontSize: 64, fontWeight: 'bold' },
-  keypad: { gap: 12 },
-  row: { flexDirection: 'row', gap: 12, height: 72 },
+  displayText: { color: '#fff', fontSize: 56, fontWeight: 'bold' },
+  keypad: { gap: 10 },
+  row: { flexDirection: 'row', gap: 10, height: 64 },
   button: { flex: 1, backgroundColor: '#27272a', borderRadius: 20, justifyContent: 'center', alignItems: 'center' },
   buttonText: { color: '#fff', fontSize: 28, fontWeight: '500' },
   operatorButton: { backgroundColor: '#18181b', borderWidth: 1, borderColor: '#27272a' },

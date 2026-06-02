@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { evaluateBasicMath } from "@calculator/shared";
 
 export default function BasicCalculator() {
@@ -30,6 +30,43 @@ export default function BasicCalculator() {
     setExpression("");
   };
 
+  const deleteLast = useCallback(() => {
+    if (display === "Error") {
+      setDisplay("0");
+      return;
+    }
+    if (display.length > 1) {
+      setDisplay(display.slice(0, -1));
+    } else {
+      setDisplay("0");
+    }
+  }, [display]);
+
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    const key = e.key;
+    if (/[0-9]/.test(key)) {
+      handleNumber(key);
+    } else if (['+', '-', '*', '/'].includes(key)) {
+      handleOperator(key);
+    } else if (key === '.' || key === '(' || key === ')' || key === '%') {
+      handleNumber(key);
+    } else if (key === 'Enter' || key === '=') {
+      e.preventDefault();
+      calculate();
+    } else if (key === 'Backspace' || key === 'Delete') {
+      deleteLast();
+    } else if (key === 'Escape') {
+      clear();
+    }
+  }, [display, expression, calculate, handleNumber, handleOperator, deleteLast, clear]);
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-50 flex items-center justify-center p-4 font-sans">
       <div className="max-w-xs w-full relative">
@@ -45,27 +82,32 @@ export default function BasicCalculator() {
           </div>
 
           <div className="grid grid-cols-4 gap-3">
-            <button onClick={clear} className="col-span-3 bg-red-900/30 text-red-400 hover:bg-red-900/50 p-4 rounded-xl font-bold transition-colors">AC</button>
-            <button onClick={() => handleOperator("/")} className="bg-zinc-800 text-blue-400 hover:bg-zinc-700 p-4 rounded-xl font-bold transition-colors">÷</button>
+            <button onClick={clear} className="col-span-2 bg-red-900/30 text-red-400 hover:bg-red-900/50 p-4 rounded-xl font-bold transition-colors">AC</button>
+            <button onClick={deleteLast} className="bg-orange-900/30 text-orange-400 hover:bg-orange-900/50 p-4 rounded-xl font-bold transition-colors">DEL</button>
+            <button onClick={() => handleOperator("/")} className="bg-zinc-800 text-blue-400 hover:bg-zinc-700 p-4 rounded-xl font-bold text-xl transition-colors">÷</button>
 
-            <button onClick={() => handleNumber("7")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors">7</button>
-            <button onClick={() => handleNumber("8")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors">8</button>
-            <button onClick={() => handleNumber("9")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors">9</button>
-            <button onClick={() => handleOperator("*")} className="bg-zinc-800 text-blue-400 hover:bg-zinc-700 p-4 rounded-xl font-bold transition-colors">×</button>
+            <button onClick={() => handleNumber("(")} className="bg-zinc-800/80 text-zinc-300 hover:bg-zinc-700 p-4 rounded-xl font-semibold transition-colors">(</button>
+            <button onClick={() => handleNumber(")")} className="bg-zinc-800/80 text-zinc-300 hover:bg-zinc-700 p-4 rounded-xl font-semibold transition-colors">)</button>
+            <button onClick={() => handleNumber("%")} className="bg-zinc-800/80 text-zinc-300 hover:bg-zinc-700 p-4 rounded-xl font-semibold transition-colors">%</button>
+            <button onClick={() => handleOperator("*")} className="bg-zinc-800 text-blue-400 hover:bg-zinc-700 p-4 rounded-xl font-bold text-xl transition-colors">×</button>
 
-            <button onClick={() => handleNumber("4")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors">4</button>
-            <button onClick={() => handleNumber("5")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors">5</button>
-            <button onClick={() => handleNumber("6")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors">6</button>
-            <button onClick={() => handleOperator("-")} className="bg-zinc-800 text-blue-400 hover:bg-zinc-700 p-4 rounded-xl font-bold transition-colors">−</button>
+            <button onClick={() => handleNumber("7")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors text-lg">7</button>
+            <button onClick={() => handleNumber("8")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors text-lg">8</button>
+            <button onClick={() => handleNumber("9")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors text-lg">9</button>
+            <button onClick={() => handleOperator("-")} className="bg-zinc-800 text-blue-400 hover:bg-zinc-700 p-4 rounded-xl font-bold text-xl transition-colors">−</button>
 
-            <button onClick={() => handleNumber("1")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors">1</button>
-            <button onClick={() => handleNumber("2")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors">2</button>
-            <button onClick={() => handleNumber("3")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors">3</button>
-            <button onClick={() => handleOperator("+")} className="bg-zinc-800 text-blue-400 hover:bg-zinc-700 p-4 rounded-xl font-bold transition-colors">+</button>
+            <button onClick={() => handleNumber("4")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors text-lg">4</button>
+            <button onClick={() => handleNumber("5")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors text-lg">5</button>
+            <button onClick={() => handleNumber("6")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors text-lg">6</button>
+            <button onClick={() => handleOperator("+")} className="bg-zinc-800 text-blue-400 hover:bg-zinc-700 p-4 rounded-xl font-bold text-xl transition-colors">+</button>
 
-            <button onClick={() => handleNumber("0")} className="col-span-2 bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors">0</button>
-            <button onClick={() => handleNumber(".")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors">.</button>
-            <button onClick={calculate} className="bg-blue-600 text-white hover:bg-blue-500 p-4 rounded-xl font-bold transition-colors shadow-lg shadow-blue-500/20">=</button>
+            <button onClick={() => handleNumber("1")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors text-lg">1</button>
+            <button onClick={() => handleNumber("2")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors text-lg">2</button>
+            <button onClick={() => handleNumber("3")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors text-lg">3</button>
+            <button onClick={calculate} className="bg-blue-600 text-white hover:bg-blue-500 p-4 rounded-xl font-bold transition-colors shadow-lg shadow-blue-500/20 text-xl row-span-2">=</button>
+
+            <button onClick={() => handleNumber("0")} className="col-span-2 bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors text-lg">0</button>
+            <button onClick={() => handleNumber(".")} className="bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-xl font-semibold transition-colors text-xl">.</button>
           </div>
         </div>
       </div>

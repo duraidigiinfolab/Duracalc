@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import Navbar from "@/components/Navbar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,16 +15,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Duracalc | Advanced EMI & Basic Calculator",
-  description: "Calculate your EMI, generate printable repayment schedules, and perform basic math operations with Duracalc.",
-  keywords: "EMI calculator, loan calculator, repayment schedule, basic calculator, math calculator, mortgage calculator, Duracalc",
+  title: "Duracalc | Advanced EMI, Percentage & Basic Math Calculator",
+  description: "Calculate your EMI, generate printable repayment schedules, compute percentages, and perform basic math operations with Duracalc's free tools.",
+  keywords: "EMI calculator, loan calculator, repayment schedule, basic calculator, percentage calculator, math calculator, mortgage calculator, Duracalc",
   other: {
     "google-adsense-account": "ca-pub-4863962410469274"
   },
   openGraph: {
-    title: "Duracalc | Advanced EMI & Basic Calculator",
-    description: "Calculate your EMI, generate printable repayment schedules, and perform basic math operations with Duracalc.",
+    title: "Duracalc | Advanced EMI, Percentage & Basic Calculator",
+    description: "Calculate your EMI, generate printable repayment schedules, compute percentages, and perform basic math operations with Duracalc.",
     type: "website",
+    siteName: "Duracalc"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Duracalc | Advanced Calculators",
+    description: "Free tools for EMI, percentage, and basic math calculations."
   }
 };
 
@@ -45,8 +52,11 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
       </head>
-      <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-50 font-sans">
-        {children}
+      <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-50 font-sans pt-16">
+        <Navbar />
+        <main className="flex-grow flex flex-col">
+          {children}
+        </main>
       </body>
     </html>
   );

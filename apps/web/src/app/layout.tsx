@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description: "Calculate your EMI, generate printable repayment schedules, and perform basic math operations with Duracalc.",
   keywords: "EMI calculator, loan calculator, repayment schedule, basic calculator, math calculator, mortgage calculator, Duracalc",
   other: {
-    "google-adsense-account": "ca-pub-4063962410469274"
+    "google-adsense-account": "ca-pub-4863962410469274"
   },
   openGraph: {
     title: "Duracalc | Advanced EMI & Basic Calculator",
@@ -40,7 +40,7 @@ export default function RootLayout({
       <head>
         <Script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4063962410469274"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4863962410469274"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />

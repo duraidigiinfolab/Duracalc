@@ -1,1 +1,6 @@
-v.1.1
+v1.1
+emi calculator with print and sharable repayment shedule
+build basic calculator
+create home page the home page needs to have options to select basic calculator emi calculator
+strong SEO
+Repayment shedule needs to have emi amount principle intrest balance in top of the shedule page needs to have loan amount ROI Period total intrest payable, total amount payable

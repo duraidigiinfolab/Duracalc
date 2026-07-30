@@ -83,62 +83,62 @@ export default function PercentageCalculator() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-50 py-12 px-4 md:px-8 font-sans flex justify-center items-center">
+    <div className="min-h-screen bg-[#FFFFFF] text-gray-900 py-12 px-4 md:px-8 font-sans flex justify-center items-center">
       <div className="w-full max-w-3xl relative">
-        <div className="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-amber-600 rounded-3xl blur-xl opacity-30 animate-pulse"></div>
-        <div className="relative bg-zinc-900/80 backdrop-blur-xl border border-zinc-800 p-8 md:p-12 rounded-3xl shadow-2xl">
+        <div className="absolute -inset-1 bg-[#2563EB]/10 rounded-3xl blur-xl opacity-30 animate-pulse"></div>
+        <div className="relative bg-[#FFFFFF] backdrop-blur-xl border border-[#E5E7EB] p-8 md:p-12 rounded-3xl shadow-2xl">
           <div className="text-center mb-10">
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent pb-2">
+            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#2563EB] to-blue-400 bg-clip-text text-transparent pb-2">
               Percentage Calculator
             </h1>
-            <p className="mt-4 text-zinc-400">Enter any two values to automatically calculate the rest.</p>
+            <p className="mt-4 text-gray-600">Enter any two values to automatically calculate the rest.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-2">Initial Value</label>
+                <label className="block text-sm font-medium text-gray-600 mb-2">Initial Value</label>
                 <input
                   type="number"
                   value={initial}
                   onChange={(e) => handleInput("initial", e.target.value)}
                   placeholder="e.g. 100"
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-xl text-zinc-100 placeholder-zinc-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                  className="w-full bg-[#FFFFFF] border border-[#E5E7EB] rounded-xl px-5 py-4 text-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-2">Percentage (%)</label>
+                <label className="block text-sm font-medium text-gray-600 mb-2">Percentage (%)</label>
                 <input
                   type="number"
                   value={percentage}
                   onChange={(e) => handleInput("percentage", e.target.value)}
                   placeholder="e.g. 20"
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-xl text-zinc-100 placeholder-zinc-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                  className="w-full bg-[#FFFFFF] border border-[#E5E7EB] rounded-xl px-5 py-4 text-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all"
                 />
               </div>
             </div>
 
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-2">Change (Amount)</label>
+                <label className="block text-sm font-medium text-gray-600 mb-2">Change (Amount)</label>
                 <input
                   type="number"
                   value={change}
                   onChange={(e) => handleInput("change", e.target.value)}
                   placeholder="e.g. 20"
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-xl text-zinc-100 placeholder-zinc-700 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
+                  className="w-full bg-[#FFFFFF] border border-[#E5E7EB] rounded-xl px-5 py-4 text-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-2">Final Value</label>
+                <label className="block text-sm font-medium text-gray-600 mb-2">Final Value</label>
                 <input
                   type="number"
                   value={final}
                   onChange={(e) => handleInput("final", e.target.value)}
                   placeholder="e.g. 120"
-                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-5 py-4 text-xl text-zinc-100 placeholder-zinc-700 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
+                  className="w-full bg-[#FFFFFF] border border-[#E5E7EB] rounded-xl px-5 py-4 text-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2563EB] transition-all"
                 />
               </div>
             </div>
@@ -147,7 +147,7 @@ export default function PercentageCalculator() {
           <div className="mt-8 text-center">
             <button 
               onClick={clearAll}
-              className="px-8 py-3 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded-xl font-medium transition-colors"
+              className="px-8 py-3 bg-[#E5E7EB] hover:bg-gray-300 text-gray-700 rounded-xl font-medium transition-colors"
             >
               Clear All
             </button>

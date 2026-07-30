@@ -1,0 +1,338 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>EMI Calculator - FinCalc Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#7ffc97",
+                        "surface-container": "#ededf3",
+                        "surface-container-high": "#e7e8ed",
+                        "outline-variant": "#c2c7d1",
+                        "surface-dim": "#d9dadf",
+                        "on-secondary-fixed": "#002109",
+                        "on-primary-container": "#8ebdf9",
+                        "surface-tint": "#2d6197",
+                        "on-secondary-container": "#007230",
+                        "on-primary-fixed-variant": "#07497d",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#7cf994",
+                        "tertiary-container": "#743b00",
+                        "surface-variant": "#e2e2e7",
+                        "on-surface": "#191c1f",
+                        "primary": "#00355f",
+                        "inverse-on-surface": "#f0f0f5",
+                        "tertiary": "#532800",
+                        "surface-container-low": "#f3f3f8",
+                        "on-background": "#191c1f",
+                        "tertiary-fixed": "#ffdcc4",
+                        "surface-bright": "#f9f9fe",
+                        "secondary": "#006e2d",
+                        "primary-container": "#0f4c81",
+                        "on-primary-fixed": "#001c37",
+                        "on-secondary-fixed-variant": "#005320",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e2e2e7",
+                        "on-tertiary-container": "#f9a767",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#42474f",
+                        "primary-fixed": "#d2e4ff",
+                        "on-tertiary-fixed-variant": "#6f3800",
+                        "primary-fixed-dim": "#a0c9ff",
+                        "inverse-primary": "#a0c9ff",
+                        "inverse-surface": "#2e3034",
+                        "tertiary-fixed-dim": "#ffb780",
+                        "background": "#f9f9fe",
+                        "on-tertiary-fixed": "#2f1400",
+                        "secondary-fixed-dim": "#62df7d",
+                        "outline": "#727780",
+                        "error-container": "#ffdad6",
+                        "surface": "#f9f9fe",
+                        "brand-green": "#16A34A"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "stack-sm": "8px",
+                        "unit": "4px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter", "sans-serif"],
+                        "display-hero": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "label-caps": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "body-sm": ["Inter", "sans-serif"],
+                        "display-hero-mobile": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-hero": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-hero-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    },
+                    "boxShadow": {
+                        'premium': '0 4px 12px rgba(0, 0, 0, 0.08)',
+                        'premium-hover': '0 8px 20px rgba(0, 0, 0, 0.12)',
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #F8FAFC; /* Required base layer from style guidance */
+        }
+        /* Custom slider styles to match guidance */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #0f4c81; /* primary-container */
+            cursor: pointer;
+            margin-top: -10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #e2e8f0;
+            border-radius: 2px;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        /* Focus styles for inputs as per guidance */
+        input[type=number]:focus, input[type=text]:focus {
+            border-color: #0f4c81 !important;
+            border-width: 2px !important;
+            box-shadow: none !important;
+            outline: none !important;
+        }
+    </style>
+</head>
+<body class="font-body-lg text-body-lg text-on-surface antialiased flex flex-col min-h-screen">
+<!-- Navigation Header -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface shadow-sm docked full-width top-0 z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-16">
+<!-- Brand -->
+<div class="flex items-center gap-2">
+<span aria-hidden="true" class="material-symbols-outlined text-primary-container dark:text-primary-fixed-dim text-2xl">calculate</span>
+<span class="text-headline-md font-headline-md font-bold text-primary-container dark:text-primary-fixed-dim">DuraCalc</span>
+</div>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors text-body-lg font-body-lg hover:bg-surface-container-low dark:hover:bg-surface-dim transition-all active:scale-95 duration-100 px-3 py-2 rounded-md" href="#">Home</a>
+<a aria-current="page" class="text-primary-container dark:text-primary-fixed-dim border-b-2 border-primary-container font-bold pb-1 text-body-lg font-body-lg hover:bg-surface-container-low dark:hover:bg-surface-dim transition-all active:scale-95 duration-100 px-3 py-2" href="#">Tools</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors text-body-lg font-body-lg hover:bg-surface-container-low dark:hover:bg-surface-dim transition-all active:scale-95 duration-100 px-3 py-2 rounded-md" href="#">About</a>
+</nav>
+<!-- Trailing Action -->
+<div>
+<button class="bg-primary-container text-on-primary px-6 py-2 rounded-lg font-body-lg text-body-lg hover:bg-opacity-90 transition-all active:scale-95 duration-100 shadow-premium hover:shadow-premium-hover">Get Started</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg flex flex-col gap-stack-lg">
+<!-- Hero Section -->
+<section class="text-center max-w-2xl mx-auto mb-stack-md">
+<h1 class="font-display-hero-mobile md:font-display-hero text-display-hero-mobile md:text-display-hero text-primary-container mb-stack-sm">EMI Calculator</h1>
+<p class="font-headline-md text-headline-md text-on-surface-variant">Calculate your monthly EMI instantly and plan your finances with confidence.</p>
+</section>
+<!-- Main Calculator Interface -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column (Inputs) - 5 Columns -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-2xl shadow-premium p-stack-md flex flex-col gap-stack-md border border-surface-variant">
+<div class="flex items-center gap-2 mb-2">
+<span aria-hidden="true" class="material-symbols-outlined text-primary-container">settings</span>
+<h2 class="font-headline-md text-headline-md text-primary-container">Loan Details</h2>
+</div>
+<!-- Input Group: Loan Amount -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="font-body-lg text-body-lg font-semibold text-on-surface" for="loanAmount">Loan Amount (₹)</label>
+<div class="relative w-1/3">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">₹</span>
+<input class="w-full pl-8 pr-3 py-2 border border-outline-variant rounded-lg font-body-lg text-body-lg text-right focus:ring-0 transition-colors" id="loanAmount" type="text" value="50,00,000">
+</div>
+</div>
+<div class="relative pt-4 pb-2">
+<input class="w-full relative z-10" id="loanAmountSlider" max="10000000" min="100000" step="100000" type="range" value="5000000">
+<!-- Custom track fill visual -->
+<div class="absolute top-[22px] left-0 h-1 bg-primary-container rounded-l-sm z-0" style="width: 50%;"></div>
+</div>
+<div class="flex justify-between text-label-caps font-label-caps text-outline">
+<span class="">1L</span>
+<span class="">10 Cr</span>
+</div>
+</div>
+<!-- Input Group: Interest Rate -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="font-body-lg text-body-lg font-semibold text-on-surface" for="interestRate">Interest Rate (%)</label>
+<div class="relative w-1/4">
+<input class="w-full pr-8 pl-3 py-2 border border-outline-variant rounded-lg font-body-lg text-body-lg text-right focus:ring-0 transition-colors" id="interestRate" type="text" value="8.5">
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant">%</span>
+</div>
+</div>
+<div class="relative pt-4 pb-2">
+<input class="w-full relative z-10" id="interestRateSlider" max="25" min="1" step="0.1" type="range" value="8.5">
+<div class="absolute top-[22px] left-0 h-1 bg-primary-container rounded-l-sm z-0" style="width: 31%;"></div>
+</div>
+<div class="flex justify-between text-label-caps font-label-caps text-outline">
+<span class="">1%</span>
+<span class="">25%</span>
+</div>
+</div>
+<!-- Input Group: Loan Tenure -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="font-body-lg text-body-lg font-semibold text-on-surface" for="loanTenure">Loan Tenure (Years)</label>
+<div class="relative w-1/4">
+<input class="w-full pr-8 pl-3 py-2 border border-outline-variant rounded-lg font-body-lg text-body-lg text-right focus:ring-0 transition-colors" id="loanTenure" type="text" value="20">
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">Yr</span>
+</div>
+</div>
+<div class="relative pt-4 pb-2">
+<input class="w-full relative z-10" id="loanTenureSlider" max="30" min="1" step="1" type="range" value="20">
+<div class="absolute top-[22px] left-0 h-1 bg-primary-container rounded-l-sm z-0" style="width: 66%;"></div>
+</div>
+<div class="flex justify-between text-label-caps font-label-caps text-outline">
+<span class="">1 Yr</span>
+<span class="">30 Yrs</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-stack-sm flex flex-col gap-3">
+<button class="w-full bg-brand-green text-on-primary py-3 rounded-xl font-headline-md text-headline-md shadow-premium hover:shadow-premium-hover transition-all active:scale-95 flex justify-center items-center gap-2">
+<span aria-hidden="true" class="material-symbols-outlined">check_circle</span>
+                        Calculate EMI
+                    </button>
+<div class="flex gap-3">
+<button class="flex-1 bg-surface-container-lowest border-2 border-primary-container text-primary-container py-2 rounded-xl font-body-lg text-body-lg font-semibold hover:bg-surface-container-low transition-colors flex justify-center items-center gap-2">
+<span aria-hidden="true" class="material-symbols-outlined text-sm">compare_arrows</span> Compare
+                        </button>
+<button class="flex-1 bg-surface-container-lowest border-2 border-outline-variant text-on-surface-variant py-2 rounded-xl font-body-lg text-body-lg font-semibold hover:bg-surface-container-low transition-colors flex justify-center items-center gap-2">
+<span aria-hidden="true" class="material-symbols-outlined text-sm">download</span> Report
+                        </button>
+</div>
+</div>
+</div>
+<!-- Right Column (Results) - 7 Columns -->
+<div class="lg:col-span-7 flex flex-col gap-stack-md">
+<!-- Hero Number Card -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-premium p-stack-lg border border-surface-variant bg-gradient-to-br from-surface-container-lowest to-surface-container-low">
+<div class="text-center">
+<p class="font-headline-md text-headline-md text-on-surface-variant mb-2">Your Monthly EMI</p>
+<p class="font-display-hero-mobile md:font-display-hero text-display-hero-mobile md:text-display-hero text-primary-container mb-1">₹43,391</p>
+<p class="font-body-sm text-body-sm text-outline">For a loan of ₹50L at 8.5% over 20 years</p>
+</div>
+<div class="h-px bg-surface-variant w-full my-stack-md"></div>
+<div class="grid grid-cols-2 gap-stack-md">
+<div class="flex flex-col items-center p-4 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm">
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-1 flex items-center gap-1">
+<span class="w-3 h-3 rounded-full bg-brand-green inline-block"></span> Total Interest
+                            </p>
+<p class="font-headline-lg text-headline-lg text-brand-green">₹54,13,879</p>
+</div>
+<div class="flex flex-col items-center p-4 rounded-xl bg-surface-container-lowest border border-outline-variant shadow-sm">
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-1 flex items-center gap-1">
+<span class="w-3 h-3 rounded-full bg-primary-container inline-block"></span> Total Payment
+                            </p>
+<p class="font-headline-lg text-headline-lg text-primary-container">₹1,04,13,879</p>
+</div>
+</div>
+</div>
+<!-- Visual Breakdown Card (Doughnut Placeholder) -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-premium p-stack-md border border-surface-variant flex flex-col md:flex-row items-center gap-stack-lg justify-center h-64">
+<div class="w-48 h-48 relative flex items-center justify-center">
+<!-- Simulated Doughnut Chart using Conic Gradient -->
+<div class="w-full h-full rounded-full border-8 border-surface-container-lowest shadow-sm" style="background: conic-gradient(#0f4c81 0% 48%, #16a34a 48% 100%);"></div>
+<!-- Inner Hole -->
+<div class="absolute w-32 h-32 bg-surface-container-lowest rounded-full flex items-center justify-center flex-col shadow-inner">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">100%</span>
+<span class="font-body-sm text-body-sm text-outline text-center leading-tight">Total<br>Amount</span>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="w-4 h-4 rounded-full bg-primary-container"></div>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Principal Amount</p>
+<p class="font-headline-md text-headline-md text-on-surface">48%</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-4 h-4 rounded-full bg-brand-green"></div>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Interest Amount</p>
+<p class="font-headline-md text-headline-md text-on-surface">52%</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Advanced Tools / Export Row -->
+<section class="flex flex-wrap justify-end gap-4 mt-stack-md border-t border-surface-variant pt-stack-md">
+<button class="bg-surface-container-lowest border border-outline-variant text-on-surface-variant px-4 py-2 rounded-lg font-body-sm text-body-sm hover:bg-surface-container-low transition-colors flex items-center gap-2 shadow-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-sm">picture_as_pdf</span> Export PDF
+            </button>
+
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-dim full-width border-t border-outline-variant dark:border-outline mt-auto">
+<div class="w-full py-stack-lg px-margin-desktop flex flex-col items-center gap-stack-md max-w-container-max mx-auto">
+<!-- Brand Logo -->
+<div class="text-headline-md font-headline-md text-on-surface font-bold flex items-center gap-2"><span aria-hidden="true" class="material-symbols-outlined">calculate</span> DuraCalc</div>
+<!-- Links -->
+<nav class="flex flex-wrap justify-center gap-6">
+<a class="text-on-surface-variant dark:text-on-surface hover:underline hover:text-primary transition-colors text-body-sm font-body-sm" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-on-surface hover:underline hover:text-primary transition-colors text-body-sm font-body-sm" href="#">Terms of Service</a>
+<a class="text-on-surface-variant dark:text-on-surface hover:underline hover:text-primary transition-colors text-body-sm font-body-sm" href="#">Disclosures</a>
+<a class="text-on-surface-variant dark:text-on-surface hover:underline hover:text-primary transition-colors text-body-sm font-body-sm" href="#">Contact Us</a>
+</nav>
+<!-- Copyright -->
+<div class="text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 DuraCalc. All rights reserved. Financial tools provided are for estimation purposes only.</p>
+</div>
+</div>
+</footer>
+
+
+
+
+</body></html>

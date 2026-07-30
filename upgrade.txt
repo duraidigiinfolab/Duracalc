@@ -1,0 +1,4 @@
+V1.1.2
+For the Percentage Calculator, include fields for initial value, percentage, change, and final value only. Ensure calculations occur in real time; for instance, entering the initial value and percentage should automatically populate the remaining two fields.
+The layout of the basic calculator page appears zoomed; to clarify my previous instructions, please avoid zooming the page. Instead, optimize the space by placing the like button on one side and the input display on the other. Additionally, include scientific values to enhance the page's utility. 
+Furthermore, the home screen currently displays only two calculator options, as the percentage calculator is missing.

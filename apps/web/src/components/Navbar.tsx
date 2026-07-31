@@ -21,6 +21,7 @@ export default function Navbar() {
               <NavLink href="/basic-calculator" currentPath={pathname}>Basic</NavLink>
               <NavLink href="/emi-calculator" currentPath={pathname}>EMI</NavLink>
               <NavLink href="/percentage-calculator" currentPath={pathname}>Percentage</NavLink>
+              <NavLink href="/eligibility-calculator" currentPath={pathname}>Eligibility</NavLink>
             </div>
           </div>
           <div className="flex items-center ml-auto">

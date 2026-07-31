@@ -12,5 +12,12 @@
     "icon": "percent",
     "route": "/percentage-calculator",
     "description": "Easily calculate percentages, discounts, and increases"
+  },
+  {
+    "id": "eligibility",
+    "title": "Eligibility Calculator",
+    "icon": "shield-checkmark",
+    "route": "/eligibility-calculator",
+    "description": "Check your loan eligibility based on income and FOIR"
   }
 ]

@@ -4,3 +4,4 @@ export { calculatorsConfig };
 export * from './logic/emiCalc';
 export * from './logic/basicCalc';
 export * from './logic/percentageCalc';
+export * from './logic/eligibilityCalc';
